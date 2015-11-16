@@ -12,6 +12,9 @@ platforms:
   - name: centos-7.1
   - name: debian-7.8
   - name: debian-8.1
+  - name: windows-2012r2
+    driver:
+      box: dhoer/windows-2012r2
 
 suites:
   - name: firefox_test
