@@ -1,4 +1,4 @@
-firefox Cookbook
+Firefox Cookbook
 ================
 
 [![Build Status](https://travis-ci.org/tas50/Firefox.svg?branch=master)](https://travis-ci.org/tas50/Firefox)
@@ -16,6 +16,7 @@ Requirements
 
 ### Platforms
 * CentOS/RHEL
+* Debian (Mozilla Iceweasel only)
 * Mac OS X
 * Ubuntu
 * Windows
