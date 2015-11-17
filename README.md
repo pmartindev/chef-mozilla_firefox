@@ -16,7 +16,7 @@ Requirements
 
 ### Platforms
 * CentOS/RHEL
-* Debian (Mozilla Iceweasel only)
+* Debian (Mozilla Iceweasel)
 * Mac OS X
 * Ubuntu
 * Windows
@@ -32,6 +32,9 @@ Attributes
 * `lang` - Language of firefox to install.  Windows and Mac OS X only. Default is `en-US`.
 * `releases_url` - URL for the releases directory for use by Windows and Mac OS X only. Linux platforms use package 
 manager.
+- `32bit_only` - For Window only on Firefox 42.0 or higher. Install 32-bit browser on 64-bit machines. 
+Default is `false`.
+
 
 Usage
 =====

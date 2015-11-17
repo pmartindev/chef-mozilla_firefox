@@ -15,28 +15,6 @@ module Firefox
 
   # private
 
-  def firefox_download_url
-    if node['firefox']['version'] == 'latest'
-      firefox_lastest_url
-    else
-      firefox_version_url
-    end
-  end
-
-  def firefox_lastest_url
-    platform = platform?('windows') ? 'win' : 'osx'
-    uri = "https://download.mozilla.org/?product=firefox-latest&os=#{platform}&lang=#{node['firefox']['lang']}"
-    response = Net::HTTP.get_response(URI(uri))
-    response['location']
-  end
-
-  def firefox_version_url
-    version = node['firefox']['version']
-    platform = platform?('windows') ? 'win32' : 'mac'
-    package = platform?('windows') ? "Firefox%20Setup%20#{version}.exe" : "Firefox%20#{version}.dmg"
-    "#{node['firefox']['releases_url']}#{version}/#{platform}/#{node['firefox']['lang']}/#{package}"
-  end
-
   # install at compile time so version is available during convergence
   def firefox_compiletime_package(name)
     package name do
@@ -50,6 +28,46 @@ module Firefox
     cmd.run_command
     cmd.error!
     cmd.stdout
+  end
+
+  # for use by win and mac only
+  def firefox_download_url
+    if node['firefox']['version'] == 'latest'
+      firefox_lastest_url
+    else
+      firefox_version_url
+    end
+  end
+
+  def firefox_platform
+    case node['platform']
+    when 'windows'
+      firefox_win_platform
+    when 'mac_os_x'
+      node['firefox']['version'] == 'latest' ? 'osx' : 'mac'
+    end
+  end
+
+  def firefox_win_platform
+    version = node['firefox']['version']
+    if node['kernel']['machine'] == 'x86_64' && !node['firefox']['32bit_only'] &&
+       (version == 'latest' || version.split('.').first.to_i >= 42)
+      'win64'
+    else
+      version == 'latest' ? 'win' : 'win32'
+    end
+  end
+
+  def firefox_lastest_url
+    uri = "https://download.mozilla.org/?product=firefox-latest&os=#{firefox_platform}&lang=#{node['firefox']['lang']}"
+    response = Net::HTTP.get_response(URI(uri))
+    response['location']
+  end
+
+  def firefox_version_url
+    version = node['firefox']['version']
+    package = platform?('windows') ? "Firefox%20Setup%20#{version}.exe" : "Firefox%20#{version}.dmg"
+    "#{node['firefox']['releases_url']}#{version}/#{firefox_platform}/#{node['firefox']['lang']}/#{package}"
   end
 end
 

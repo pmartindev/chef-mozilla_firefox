@@ -22,3 +22,4 @@
 default['firefox']['version'] = 'latest'
 default['firefox']['lang'] = 'en-US'
 default['firefox']['releases_url'] = 'http://download.cdn.mozilla.net/pub/firefox/releases/'
+default['firefox']['32bit_only'] = false

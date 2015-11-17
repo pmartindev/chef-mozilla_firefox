@@ -1,8 +1,9 @@
 # CHANGELOG
 
 ## 2.1.0
+* Support Windows 64bit
 * Support Debian Iceweasel
-* Fix latest download URL
+* Fix "latest" download URL
 
 ## 2.0.5
 * Fix redirection forbidden 

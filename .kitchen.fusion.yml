@@ -15,7 +15,7 @@ platforms:
       box: macosx-10.10
 
 suites:
-  - name: firefox_test
+  - name: default
     run_list:
       - recipe[firefox_test::default]
       - recipe[firefox_test::version]
