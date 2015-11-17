@@ -10,8 +10,8 @@ AllCops:
 #  Enabled: false
 LineLength:
   Enabled: false
-MethodLength:
-  Max: 30
+#MethodLength:
+#  Max: 30
 #NumericLiterals:
 #  Enabled: false
 #SingleSpaceBeforeFirstArg:
