@@ -17,24 +17,25 @@
 # limitations under the License.
 
 if platform_family?('windows', 'mac_os_x')
-  version = firefox_version
-  url = "#{firefox_base_uri}#{firefox_package(version)}"
+  url = firefox_download_url
+  version = firefox_version(url)
 end
 
-if platform_family?('windows')
+case node['platform']
+when 'windows'
   windows_package "Mozilla Firefox #{version} (x86 #{node['firefox']['lang']})" do
     source url
     installer_type :custom
     options '-ms'
     action :install
   end
-elsif platform_family?('mac_os_x')
+when 'mac_os_x'
   dmg_package 'Firefox' do
     dmg_name 'firefox'
     source url
     action :install
   end
-else # assume linux platform
+else
   package 'firefox' do
     version node['firefox']['version'] unless node['firefox']['version'] == 'latest'
     action :nothing
