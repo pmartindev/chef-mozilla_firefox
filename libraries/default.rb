@@ -1,6 +1,3 @@
-require 'open-uri'
-require 'openssl'
-
 # Firefox helper
 module Firefox
   def firefox_version(url = nil)
@@ -17,13 +14,6 @@ module Firefox
   end
 
   # private
-
-  def firefox_shellout(command)
-    cmd = Mixlib::ShellOut.new(command)
-    cmd.run_command
-    cmd.error!
-    cmd.stdout
-  end
 
   def firefox_download_url
     if node['firefox']['version'] == 'latest'
@@ -45,6 +35,21 @@ module Firefox
     platform = platform?('windows') ? 'win32' : 'mac'
     package = platform?('windows') ? "Firefox%20Setup%20#{version}.exe" : "Firefox%20#{version}.dmg"
     "#{node['firefox']['releases_url']}#{version}/#{platform}/#{node['firefox']['lang']}/#{package}"
+  end
+
+  # install at compile time so version is available during convergence
+  def firefox_compiletime_package(name)
+    package name do
+      version node['firefox']['version'] unless node['firefox']['version'] == 'latest'
+      action :nothing
+    end.run_action(:upgrade)
+  end
+
+  def firefox_shellout(command)
+    cmd = Mixlib::ShellOut.new(command)
+    cmd.run_command
+    cmd.error!
+    cmd.stdout
   end
 end
 

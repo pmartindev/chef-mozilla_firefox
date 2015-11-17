@@ -36,13 +36,7 @@ when 'mac_os_x'
     action :install
   end
 when 'debian'
-  package 'iceweasel' do
-    version node['firefox']['version'] unless node['firefox']['version'] == 'latest'
-    action :nothing
-  end.run_action(:upgrade) # install at compile time so version is available during convergence
-else
-  package 'firefox' do
-    version node['firefox']['version'] unless node['firefox']['version'] == 'latest'
-    action :nothing
-  end.run_action(:upgrade) # install at compile time so version is available during convergence
+  firefox_compiletime_package('iceweasel')
+else # linux
+  firefox_compiletime_package('firefox')
 end

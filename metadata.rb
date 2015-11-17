@@ -2,9 +2,9 @@ name 'firefox'
 maintainer 'Tim Smith'
 maintainer_email 'tsmith84@gmail.com'
 license 'Apache 2.0'
-description 'Installs Mozilla Firefox on multiple operating systems'
+description 'Installs Mozilla Firefox browser'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '2.0.5'
+version '2.1.0'
 
 %w(redhat centos windows mac_os_x debian ubuntu).each do |os|
   supports os

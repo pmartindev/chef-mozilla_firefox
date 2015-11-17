@@ -1,6 +1,8 @@
-firefox Cookbook CHANGELOG
-==========================
-This file is used to list changes made in each version of the firefox cookbook.
+# CHANGELOG
+
+## 2.1.0
+* Support Debian Iceweasel
+* Fix latest download URL
 
 ## 2.0.5
 * Fix redirection forbidden 
