@@ -23,7 +23,8 @@ end
 
 case node['platform']
 when 'windows'
-  windows_package "Mozilla Firefox #{version} (x86 #{node['firefox']['lang']})" do
+  bit = firefox_win_64bit? ? 'x64' : 'x86'
+  windows_package "Mozilla Firefox #{version} (#{bit} #{node['firefox']['lang']})" do
     source url
     installer_type :custom
     options '-ms'

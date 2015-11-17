@@ -1,7 +1,9 @@
 # CHANGELOG
 
-## 2.1.0
+## 3.0.0
 * Support Windows 64bit
+
+## 2.1.0
 * Support Debian Iceweasel
 * Fix "latest" download URL
 

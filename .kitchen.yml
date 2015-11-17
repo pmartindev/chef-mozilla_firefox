@@ -31,13 +31,13 @@ suites:
     attributes:
       firefox:
         32bit_only: true
-     excludes:
-       - ubuntu-12.04
-       - ubuntu-14.04
-       - centos-6.7
-       - centos-7.1
-       - debian-7.8
-       - debian-8.1
+    excludes:
+     - ubuntu-12.04
+     - ubuntu-14.04
+     - centos-6.7
+     - centos-7.1
+     - debian-7.8
+     - debian-8.1
 
   - name: linux_custom_version
     run_list:

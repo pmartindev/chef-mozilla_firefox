@@ -9,4 +9,9 @@ describe 'firefox::default' do
     its(:stdout) { should match(/Mozilla Firefox /) }
     its(:exit_status) { should eq 0 }
   end
+
+  describe windows_registry_key('HKLM\SOFTWARE\Wow6432Node\Mozilla\Mozilla Firefox') do
+    it { should exist }
+    it { should have_property('CurrentVersion') }
+  end
 end

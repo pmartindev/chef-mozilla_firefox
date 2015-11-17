@@ -48,13 +48,17 @@ module Firefox
     end
   end
 
-  def firefox_win_platform
+  def firefox_win_64bit?
     version = node['firefox']['version']
-    if node['kernel']['machine'] == 'x86_64' && !node['firefox']['32bit_only'] &&
-       (version == 'latest' || version.split('.').first.to_i >= 42)
+    node['kernel']['machine'] == 'x86_64' && !node['firefox']['32bit_only'] &&
+      (version == 'latest' || version.split('.').first.to_i >= 42)
+  end
+
+  def firefox_win_platform
+    if firefox_win_64bit?
       'win64'
     else
-      version == 'latest' ? 'win' : 'win32'
+      node['firefox']['version'] == 'latest' ? 'win' : 'win32'
     end
   end
 
