@@ -29,7 +29,7 @@ suites:
       - recipe[mozilla_firefox_test::default]
       - recipe[mozilla_firefox_test::version]
     attributes:
-      firefox:
+      mozilla_firefox:
         32bit_only: true
     excludes:
      - ubuntu-12.04
