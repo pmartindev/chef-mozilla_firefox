@@ -5,7 +5,7 @@ module MozillaFirefox
     when 'windows', 'mac_os_x'
       return node['mozilla_firefox']['version'] unless firefox_latest?
       url = firefox_download_url unless url
-      url.match(/releases\/([^\/]*)/)[1] # http://rubular.com/r/JZsE2buXdW
+      url.match(%r{releases/([^/]*)})[1] # http://rubular.com/r/JZsE2buXdW
     when 'debian'
       firefox_shellout('iceweasel -v').match(/Mozilla Iceweasel (.*)/)[1]
     else
