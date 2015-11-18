@@ -71,7 +71,7 @@ module MozillaFirefox
   def firefox_version_url
     version = node['mozilla_firefox']['version']
     package = platform?('windows') ? "Firefox%20Setup%20#{version}.exe" : "Firefox%20#{version}.dmg"
-    "#{node['mozilla_firefox']['releases_url']}#{version}/#{firefox_platform}/#{node['mozilla_firefox']['lang']}/#{package}"
+    "http://download.cdn.mozilla.net/pub/firefox/releases/#{version}/#{firefox_platform}/#{node['mozilla_firefox']['lang']}/#{package}"
   end
 end
 

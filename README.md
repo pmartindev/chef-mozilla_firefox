@@ -47,7 +47,6 @@ allow_any_instance_of(Chef::Recipe).to receive(:firefox_version).and_return('42.
 * `node['mozilla_firefox']['version']` - Install latest or specific version. 
 Mac OS X and Windows only (Linux uses package manager). Default is `latest`.
 * `node['mozilla_firefox']['lang']` - Language of firefox to install.  Windows and Mac OS X only. Default is `en-US`.
-* `node['mozilla_firefox']['releases_url']` - URL for the releases directory. Windows and Mac OS X only.
 * `node['mozilla_firefox']['32bit_only']` - Install 32-bit browser on 64-bit machines.  
 Windows only for Firefox 42.0 or higher. Default is `false`.
 
