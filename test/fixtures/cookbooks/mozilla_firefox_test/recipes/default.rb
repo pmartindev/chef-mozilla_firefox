@@ -3,4 +3,4 @@ execute 'apt-get update' do
   action :nothing
 end.run_action(:run)
 
-include_recipe 'firefox::default'
+include_recipe 'mozilla_firefox::default'

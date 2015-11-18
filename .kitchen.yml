@@ -3,7 +3,7 @@ driver:
   name: vagrant
 
 provisioner:
-  name: chef_zero
+  name: chef_solo
 
 platforms:
   - name: windows-2012r2
@@ -19,15 +19,15 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[firefox_test::default]
-      - recipe[firefox_test::version]
-      - recipe[firefox_test::x11]
+      - recipe[mozilla_firefox_test::default]
+      - recipe[mozilla_firefox_test::version]
+      - recipe[mozilla_firefox_test::x11]
     attributes:
 
   - name: windows_32bit_only
     run_list:
-      - recipe[firefox_test::default]
-      - recipe[firefox_test::version]
+      - recipe[mozilla_firefox_test::default]
+      - recipe[mozilla_firefox_test::version]
     attributes:
       firefox:
         32bit_only: true
@@ -38,17 +38,3 @@ suites:
      - centos-7.1
      - debian-7.8
      - debian-8.1
-
-  - name: linux_custom_version
-    run_list:
-      - recipe[firefox_test::default]
-    attributes:
-      firefox:
-        version: "28.0+build2-0ubuntu2"
-    excludes:
-      - windows-2012r2
-      - ubuntu-12.04
-      - centos-6.7
-      - centos-7.1
-      - debian-7.8
-      - debian-8.1

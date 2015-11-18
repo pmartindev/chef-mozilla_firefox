@@ -1,9 +1,9 @@
-# Firefox helper
-module Firefox
+# MozillaFirefox helper
+module MozillaFirefox
   def firefox_version(url = nil)
     case node['platform']
     when 'windows', 'mac_os_x'
-      return node['firefox']['version'] unless node['firefox']['version'] == 'latest'
+      return node['mozilla_firefox']['version'] unless node['mozilla_firefox']['version'] == 'latest'
       url = firefox_download_url unless url
       url.match(/(-|%20)([\d|.]*).(exe|dmg|tar.bz2)/)[2] # http://rubular.com/r/thFO453EZZ
     when 'debian'
@@ -18,7 +18,7 @@ module Firefox
   # install at compile time so version is available during convergence
   def firefox_compiletime_package(name)
     package name do
-      version node['firefox']['version'] unless node['firefox']['version'] == 'latest'
+      version node['mozilla_firefox']['version'] unless node['mozilla_firefox']['version'] == 'latest'
       action :nothing
     end.run_action(:upgrade)
   end
@@ -32,7 +32,7 @@ module Firefox
 
   # for use by win and mac only
   def firefox_download_url
-    if node['firefox']['version'] == 'latest'
+    if node['mozilla_firefox']['version'] == 'latest'
       firefox_lastest_url
     else
       firefox_version_url
@@ -44,13 +44,13 @@ module Firefox
     when 'windows'
       firefox_win_platform
     when 'mac_os_x'
-      node['firefox']['version'] == 'latest' ? 'osx' : 'mac'
+      node['mozilla_firefox']['version'] == 'latest' ? 'osx' : 'mac'
     end
   end
 
   def firefox_win_64bit?
-    version = node['firefox']['version']
-    node['kernel']['machine'] == 'x86_64' && !node['firefox']['32bit_only'] &&
+    version = node['mozilla_firefox']['version']
+    node['kernel']['machine'] == 'x86_64' && !node['mozilla_firefox']['32bit_only'] &&
       (version == 'latest' || version.split('.').first.to_i >= 42)
   end
 
@@ -58,23 +58,23 @@ module Firefox
     if firefox_win_64bit?
       'win64'
     else
-      node['firefox']['version'] == 'latest' ? 'win' : 'win32'
+      node['mozilla_firefox']['version'] == 'latest' ? 'win' : 'win32'
     end
   end
 
   def firefox_lastest_url
-    uri = "https://download.mozilla.org/?product=firefox-latest&os=#{firefox_platform}&lang=#{node['firefox']['lang']}"
+    uri = "https://download.mozilla.org/?product=firefox-latest&os=#{firefox_platform}&lang=#{node['mozilla_firefox']['lang']}"
     response = Net::HTTP.get_response(URI(uri))
     response['location']
   end
 
   def firefox_version_url
-    version = node['firefox']['version']
+    version = node['mozilla_firefox']['version']
     package = platform?('windows') ? "Firefox%20Setup%20#{version}.exe" : "Firefox%20#{version}.dmg"
-    "#{node['firefox']['releases_url']}#{version}/#{firefox_platform}/#{node['firefox']['lang']}/#{package}"
+    "#{node['mozilla_firefox']['releases_url']}#{version}/#{firefox_platform}/#{node['mozilla_firefox']['lang']}/#{package}"
   end
 end
 
-Chef::Provider.send(:include, Firefox)
-Chef::Recipe.send(:include, Firefox)
-Chef::Resource.send(:include, Firefox)
+Chef::Provider.send(:include, MozillaFirefox)
+Chef::Recipe.send(:include, MozillaFirefox)
+Chef::Resource.send(:include, MozillaFirefox)

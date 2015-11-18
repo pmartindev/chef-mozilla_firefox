@@ -1,4 +1,4 @@
-include_recipe 'firefox::default'
+include_recipe 'mozilla_firefox::default'
 
 version = firefox_version
 

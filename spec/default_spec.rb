@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'firefox_test::default' do
+describe 'mozilla_firefox_test::default' do
   context 'windows install of latest version' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'windows', version: '2008R2') do
@@ -22,9 +22,9 @@ describe 'firefox_test::default' do
   context 'override default version and lang' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'windows', version: '2008R2') do |node|
-        node.set['firefox']['version'] = '29.0.1'
-        node.set['firefox']['lang'] = 'fr'
-        node.set['firefox']['32bit_only'] = true
+        node.set['mozilla_firefox']['version'] = '29.0.1'
+        node.set['mozilla_firefox']['lang'] = 'fr'
+        node.set['mozilla_firefox']['32bit_only'] = true
       end.converge(described_recipe)
     end
 
@@ -65,20 +65,6 @@ describe 'firefox_test::default' do
 
     it 'updates package manager' do
       expect(chef_run).to_not run_execute('apt-get update')
-    end
-  end
-
-  context 'linux install of specific version using package manager' do
-    let(:chef_run) do
-      ChefSpec::SoloRunner.new do |node|
-        node.set['firefox']['version'] = '28.0+build2-0ubuntu2'
-      end.converge(described_recipe)
-    end
-
-    it 'installs latest version' do
-      expect(chef_run).to upgrade_package('firefox').with(
-        version: '28.0+build2-0ubuntu2'
-      )
     end
   end
 end
