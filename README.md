@@ -7,7 +7,8 @@
 [travis]: https://travis-ci.org/dhoer/chef-mozilla_firefox
 
 This cookbook installs Firefox browser. Mac OS X and Windows downloads directly from 
-Mozilla where you can specify a version with `latest` being the default, and a language with `en-US` being the default.
+Mozilla where you can specify a version (e.g. `latest`, `latest-esr`, `latest-beta`, `42.0`, `38.4.0esr`, or `43.0b4`)
+with `latest` being the default, and a language with `en-US` being the default.
 Linux only uses the package manager at this time.
  
 A `firefox_version` method is also available to retrieve the version installed.
