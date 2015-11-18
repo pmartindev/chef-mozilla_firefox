@@ -7,7 +7,7 @@
 [travis]: https://travis-ci.org/dhoer/chef-mozilla_firefox
 
 This cookbook installs the latest version of Firefox by default. 
-On Mac OS X and Windows you can also specify a specific version, e.g. `33.0.1` 
+On Mac OS X and Windows you can also specify a specific version, e.g. `42.0` 
 and select a specific language with `en-US` being the default.
  
 A `firefox_version` method is also available to retrieve exact version installed.

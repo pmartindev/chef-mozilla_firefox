@@ -10,10 +10,8 @@ group :unit do
   gem 'chefspec',   '~> 4.3'
 end
 
-group :kitchen_common do
+group :integration do
   gem 'test-kitchen', '~> 1.4'
-end
-
-group :kitchen_vagrant do
   gem 'kitchen-vagrant', '~> 0.18'
+  gem 'winrm-transport', '~> 1.0'
 end
