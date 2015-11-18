@@ -3,9 +3,9 @@ module MozillaFirefox
   def firefox_version(url = nil)
     case node['platform']
     when 'windows', 'mac_os_x'
-      return node['mozilla_firefox']['version'] unless node['mozilla_firefox']['version'] == 'latest'
+      return node['mozilla_firefox']['version'] unless firefox_latest?
       url = firefox_download_url unless url
-      url.match(/(-|%20)([\d|.]*).(exe|dmg|tar.bz2)/)[2] # http://rubular.com/r/thFO453EZZ
+      url.match(/releases\/([^\/]*)/)[1] # http://rubular.com/r/JZsE2buXdW
     when 'debian'
       firefox_shellout('iceweasel -v').match(/Mozilla Iceweasel (.*)/)[1]
     else
@@ -18,7 +18,6 @@ module MozillaFirefox
   # install at compile time so version is available during convergence
   def firefox_compiletime_package(name)
     package name do
-      version node['mozilla_firefox']['version'] unless node['mozilla_firefox']['version'] == 'latest'
       action :nothing
     end.run_action(:upgrade)
   end
@@ -32,46 +31,42 @@ module MozillaFirefox
 
   # for use by win and mac only
   def firefox_download_url
-    if node['mozilla_firefox']['version'] == 'latest'
-      firefox_lastest_url
-    else
-      firefox_version_url
-    end
-  end
-
-  def firefox_platform
-    case node['platform']
-    when 'windows'
-      firefox_win_platform
-    when 'mac_os_x'
-      node['mozilla_firefox']['version'] == 'latest' ? 'osx' : 'mac'
-    end
-  end
-
-  def firefox_win_64bit?
-    version = node['mozilla_firefox']['version']
-    node['kernel']['machine'] == 'x86_64' && !node['mozilla_firefox']['32bit_only'] &&
-      (version == 'latest' || version.split('.').first.to_i >= 42)
-  end
-
-  def firefox_win_platform
-    if firefox_win_64bit?
-      'win64'
-    else
-      node['mozilla_firefox']['version'] == 'latest' ? 'win' : 'win32'
-    end
-  end
-
-  def firefox_lastest_url
-    uri = "https://download.mozilla.org/?product=firefox-latest&os=#{firefox_platform}&lang=#{node['mozilla_firefox']['lang']}"
+    lang = node['mozilla_firefox']['lang']
+    uri = "https://download.mozilla.org/?product=#{firefox_product}&os=#{firefox_os}&lang=#{lang}"
     response = Net::HTTP.get_response(URI(uri))
     response['location']
   end
 
-  def firefox_version_url
-    version = node['mozilla_firefox']['version']
-    package = platform?('windows') ? "Firefox%20Setup%20#{version}.exe" : "Firefox%20#{version}.dmg"
-    "http://download.cdn.mozilla.net/pub/firefox/releases/#{version}/#{firefox_platform}/#{node['mozilla_firefox']['lang']}/#{package}"
+  def firefox_product
+    case node['mozilla_firefox']['version']
+    when 'latest'
+      'firefox-latest'
+    when 'latest-esr'
+      'firefox-esr-latest'
+    when 'latest-beta'
+      'firefox-beta-latest'
+    else
+      "firefox-#{node['mozilla_firefox']['version']}-SSL"
+    end
+  end
+
+  def firefox_os
+    case node['platform']
+    when 'windows'
+      firefox_win_64bit? ? 'win64' : 'win'
+    when 'mac_os_x'
+      'osx'
+    end
+  end
+
+  # support for firefox 64-bit windows was released in 42.0
+  def firefox_win_64bit?
+    node['kernel']['machine'] == 'x86_64' && !node['mozilla_firefox']['32bit_only'] &&
+      (firefox_latest? || node['mozilla_firefox']['version'].split('.').first.to_i >= 42)
+  end
+
+  def firefox_latest?
+    node['mozilla_firefox']['version'].include?('latest')
   end
 end
 
