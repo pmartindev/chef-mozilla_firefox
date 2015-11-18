@@ -13,5 +13,5 @@ end
 depends 'dmg', '~> 2.2'
 depends 'windows', '~> 1.0'
 
-source_url 'https://github.com/dhoer/mozilla_firefox' if respond_to?(:source_url)
-issues_url 'https://github.com/dhoer/mozilla_firefox/issues' if respond_to?(:issues_url)
+source_url 'https://github.com/dhoer/chef-mozilla_firefox' if respond_to?(:source_url)
+issues_url 'https://github.com/dhoer/chef-mozilla_firefox/issues' if respond_to?(:issues_url)
