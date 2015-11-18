@@ -48,8 +48,8 @@ allow_any_instance_of(Chef::Recipe).to receive(:firefox_version).and_return('42.
 Mac OS X and Windows only (Linux uses package manager). Default is `latest`.
 * `node['mozilla_firefox']['lang']` - Language of firefox to install.  Windows and Mac OS X only. Default is `en-US`.
 * `node['mozilla_firefox']['releases_url']` - URL for the releases directory. Windows and Mac OS X only.
-* `node['mozilla_firefox']['32bit_only']` - For Window only on Firefox 42.0 or higher. 
-Install 32-bit browser on 64-bit machines. Default is `false`.
+* `node['mozilla_firefox']['32bit_only']` - Install 32-bit browser on 64-bit machines.  
+Windows only for Firefox 42.0 or higher. Default is `false`.
 
 ## Getting Help
 * Ask specific questions on [Stack Overflow](http://stackoverflow.com/questions/tagged/firefox).
