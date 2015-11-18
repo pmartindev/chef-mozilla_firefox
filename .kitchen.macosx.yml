@@ -1,4 +1,4 @@
-# Usage: KITCHEN_YAML=.kitchen.fusion.yml kitchen list
+# Usage: KITCHEN_YAML=.kitchen.macosx.yml kitchen list
 ---
 driver:
   name: vagrant
@@ -17,6 +17,6 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[firefox_test::default]
-      - recipe[firefox_test::version]
+      - recipe[mozilla_firefox_test::default]
+      - recipe[mozilla_firefox_test::version]
     attributes:
