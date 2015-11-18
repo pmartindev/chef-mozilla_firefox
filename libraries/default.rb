@@ -4,8 +4,7 @@ module MozillaFirefox
     case node['platform']
     when 'windows', 'mac_os_x'
       return node['mozilla_firefox']['version'] unless firefox_latest?
-      url = firefox_download_url unless url
-      url.match(%r{releases/([^/]*)})[1] # http://rubular.com/r/JZsE2buXdW
+      (url ? url : firefox_download_url).match(%r{releases/([^/]*)})[1] # http://rubular.com/r/JZsE2buXdW
     when 'debian'
       firefox_shellout('iceweasel -v').match(/Mozilla Iceweasel (.*)/)[1]
     else
@@ -59,7 +58,7 @@ module MozillaFirefox
     end
   end
 
-  # support for firefox 64-bit windows was released in 42.0
+  # support firefox 64-bit windows (v42.0+)
   def firefox_win_64bit?
     node['kernel']['machine'] == 'x86_64' && !node['mozilla_firefox']['32bit_only'] &&
       (firefox_latest? || node['mozilla_firefox']['version'].split('.').first.to_i >= 42)
