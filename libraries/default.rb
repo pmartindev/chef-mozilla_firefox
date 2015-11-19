@@ -31,8 +31,10 @@ module MozillaFirefox
   # for use by win and mac only
   def firefox_download_url
     lang = node['mozilla_firefox']['lang']
-    uri = "https://download.mozilla.org/?product=#{firefox_product}&os=#{firefox_os}&lang=#{lang}"
-    response = Net::HTTP.get_response(URI(uri))
+    uri = URI("https://download.mozilla.org/?product=#{firefox_product}&os=#{firefox_os}&lang=#{lang}")
+    response = Net::HTTP.start(uri.host, use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
+      http.get uri.request_uri
+    end
     response['location']
   end
 
