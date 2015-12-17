@@ -1,33 +1,50 @@
 require 'spec_helper'
 
 describe 'mozilla_firefox_test::default' do
-  context 'windows install of latest version' do
+  context 'windows override default version and lang' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'windows', version: '2008R2').converge(described_recipe)
+      ChefSpec::SoloRunner.new(platform: 'windows', version: '2008R2') do |node|
+        node.set['mozilla_firefox']['version'] = '42.0'
+        node.set['mozilla_firefox']['lang'] = 'fr'
+      end.converge(described_recipe)
     end
 
-    it 'installs latest version' do
-      expect(chef_run).to install_windows_package("Mozilla Firefox #{VER} (x64 en-US)").with(
-        source: "http://download.cdn.mozilla.net/pub/firefox/releases/#{VER}/win64/en-US/Firefox%20Setup%20#{VER}.exe",
+    it 'installs 64bit french version' do
+      expect(chef_run).to install_windows_package('Mozilla Firefox 42.0 (x64 fr)').with(
+        source:
+          'https://download-installer.cdn.mozilla.net/pub/firefox/releases/42.0/win64/fr/Firefox%20Setup%2042.0.exe',
         installer_type: :custom,
         options: '-ms'
       )
     end
   end
 
-  context 'override default version and lang' do
+  context 'windows install fails' do
+    let(:chef_run) do
+      ChefSpec::SoloRunner.new(platform: 'windows', version: '2008R2').converge(described_recipe)
+    end
+
+    it 'fails because 64bit esr does not exist' do
+      expect do
+        chef_run
+      end.to raise_error(
+        RuntimeError,
+        '404 Not Found: https://download.mozilla.org/?product=firefox-esr-latest&os=win64&lang=en-US'
+      )
+    end
+  end
+
+  context 'windows install 32bit esr' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'windows', version: '2008R2') do |node|
-        node.set['mozilla_firefox']['version'] = '38.4.0esr'
-        node.set['mozilla_firefox']['lang'] = 'fr'
         node.set['mozilla_firefox']['32bit_only'] = true
       end.converge(described_recipe)
     end
 
-    it 'installs specific version and lang' do
-      expect(chef_run).to install_windows_package('Mozilla Firefox 38.4.0esr (x86 fr)').with(
-        source: 'https://download-installer.cdn.mozilla.net/pub/firefox/releases/38.4.0esr/win32/fr/'\
-        'Firefox%20Setup%2038.4.0esr.exe',
+    it 'installs 32bit version' do
+      expect(chef_run).to install_windows_package("Mozilla Firefox #{VER} (x86 en-US)").with(
+        source: "https://download-installer.cdn.mozilla.net/pub/firefox/releases/#{VER}/win32/en-US/"\
+        "Firefox%20Setup%20#{VER}.exe",
         installer_type: :custom,
         options: '-ms'
       )
@@ -41,7 +58,7 @@ describe 'mozilla_firefox_test::default' do
 
     it 'installs latest version' do
       expect(chef_run).to install_dmg_package('Firefox').with(
-        source: "http://download.cdn.mozilla.net/pub/firefox/releases/#{VER}/mac/en-US/Firefox%20#{VER}.dmg",
+        source: "https://download-installer.cdn.mozilla.net/pub/firefox/releases/#{VER}/mac/en-US/Firefox%20#{VER}.dmg",
         dmg_name: 'firefox'
       )
     end

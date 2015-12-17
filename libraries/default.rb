@@ -35,6 +35,7 @@ module MozillaFirefox
     response = Net::HTTP.start(uri.host, use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
       http.get uri.request_uri
     end
+    fail("#{response.code} #{response.message}: #{uri}") unless response.is_a?(Net::HTTPRedirection)
     response['location']
   end
 

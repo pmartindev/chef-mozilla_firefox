@@ -6,10 +6,10 @@
 [cookbook]: https://supermarket.chef.io/cookbooks/mozilla_firefox
 [travis]: https://travis-ci.org/dhoer/chef-mozilla_firefox
 
-This cookbook installs Firefox browser. Mac OS X and Windows downloads directly from 
-Mozilla where you can specify a version (e.g. `latest`, `latest-esr`, `latest-beta`, `42.0`, `38.4.0esr`, or `43.0b4`)
-with `latest` being the default, and a language with `en-US` being the default.
-Linux only uses the package manager at this time.
+This cookbook installs Firefox browser. Mac OS X and Windows download directly from 
+Mozilla where you can specify version (e.g., `latest`, `latest-esr`, `latest-beta`, `42.0`, `38.4.0esr`, or `43.0b4`)
+and language with `latest-esr`and `en-US` being the defaults.
+Linux platforms only use the package manager at this time.
  
 A `firefox_version` method is also available to retrieve the version installed.
 
@@ -30,9 +30,9 @@ Chef 11+
 
 ## Usage
 
-Include the default recipe on a node's runlist to ensure that Firefox is installed.
+Include default recipe in a cookbook or a run list to install Firefox browser.
 
-The following example retrieves the version installed by using `firefox_version` method:
+The following example retrieves version installed by using `firefox_version` method:
 
 ```ruby
 v = firefox_version
@@ -46,8 +46,8 @@ allow_any_instance_of(Chef::Recipe).to receive(:firefox_version).and_return('42.
 
 ### Attributes
 * `node['mozilla_firefox']['version']` - Install `latest`, `latest-esr`, `latest-beta`, or specific version 
-e.g. `42.0`, `38.4.0esr`, or `43.0b4`. 
-Mac OS X and Windows only (Linux only uses the package manager). Default is `latest`.
+e.g., `42.0`, `38.4.0esr`, or `43.0b4`. 
+Mac OS X and Windows only (Linux platforms use the package manager). Default is `latest-esr`.
 * `node['mozilla_firefox']['lang']` - Language to install.  Windows and Mac OS X only. Default is `en-US`.
 * `node['mozilla_firefox']['32bit_only']` - Install 32-bit browser on 64-bit machines. Windows only. Default is `false`.
 
