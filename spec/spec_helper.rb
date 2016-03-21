@@ -2,6 +2,6 @@ require 'chefspec'
 require 'chefspec/berkshelf'
 require_relative '../libraries/default'
 
-VER = '38.5.0esr'
+VER = '38.5.0esr'.freeze
 
 at_exit { ChefSpec::Coverage.report! }

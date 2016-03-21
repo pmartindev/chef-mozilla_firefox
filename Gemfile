@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 group :lint do
-  gem 'foodcritic', '~> 5.0'
+  gem 'foodcritic'
   gem 'rubocop', '~> 0.35'
 end
 
@@ -14,4 +14,5 @@ group :integration do
   gem 'test-kitchen', '~> 1.4'
   gem 'kitchen-vagrant', '~> 0.18'
   gem 'winrm-transport', '~> 1.0'
+  gem 'winrm-fs ', '~> 0.3'
 end
