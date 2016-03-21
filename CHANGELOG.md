@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.1.0
+## 1.1.0 2016-03-21
 
 - Fix #2 Change default version from latest to latest-esr
 
