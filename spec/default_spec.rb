@@ -19,17 +19,17 @@ describe 'mozilla_firefox_test::default' do
     end
   end
 
-  context 'windows install fails' do
+  context 'windows install 64bit esr' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'windows', version: '2008R2').converge(described_recipe)
     end
 
-    it 'fails because 64bit esr does not exist' do
-      expect do
-        chef_run
-      end.to raise_error(
-        RuntimeError,
-        '404 Not Found: https://download.mozilla.org/?product=firefox-esr-latest&os=win64&lang=en-US'
+    it 'installs 32bit version' do
+      expect(chef_run).to install_windows_package("Mozilla Firefox #{VER} (x64 en-US)").with(
+        source: "https://download-installer.cdn.mozilla.net/pub/firefox/releases/#{VER}/win64/en-US/"\
+        "Firefox%20Setup%20#{VER}.exe",
+        installer_type: :custom,
+        options: '-ms'
       )
     end
   end
