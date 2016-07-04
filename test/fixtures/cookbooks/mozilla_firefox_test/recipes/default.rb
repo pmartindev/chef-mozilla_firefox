@@ -1,6 +1,10 @@
-execute 'apt-get update' do
-  only_if { platform_family?('debian') }
-  action :nothing
-end.run_action(:run)
+include_recipe 'mozilla_firefox'
 
-include_recipe 'mozilla_firefox::default'
+version = firefox_version
+
+raise "Firefox version returned is invalid: #{version}" unless version =~ /[\d|.]*/
+
+log 'firefox version' do
+  message version
+end
+
