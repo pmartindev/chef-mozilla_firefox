@@ -6,7 +6,7 @@ module MozillaFirefox
       return node['mozilla_firefox']['version'] unless firefox_latest?
       (url ? url : firefox_download_url).match(%r{releases/([^/]*)})[1] # http://rubular.com/r/JZsE2buXdW
     when 'debian'
-      firefox_shellout('iceweasel -v').match(/Mozilla Iceweasel (.*)/)[1]
+      firefox_shellout('iceweasel -v').match(/Mozilla Firefox (.*)/)[1]
     else
       firefox_shellout('firefox -v').match(/Mozilla Firefox (.*)/)[1]
     end
