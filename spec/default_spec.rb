@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'mozilla_firefox_test::default' do
+describe 'mozilla_firefox' do
   context 'windows override default version and lang' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'windows', version: '2008R2') do |node|
@@ -71,10 +71,6 @@ describe 'mozilla_firefox_test::default' do
       expect(chef_run).to upgrade_package('firefox').with(
         version: nil
       )
-    end
-
-    it 'updates package manager' do
-      expect(chef_run).to_not run_execute('apt-get update')
     end
   end
 end

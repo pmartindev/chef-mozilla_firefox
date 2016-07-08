@@ -96,4 +96,4 @@ platforms:
 suites:
 - name: default
   run_list:
-    - mozilla_firefox_test
+    - mozilla_firefox
