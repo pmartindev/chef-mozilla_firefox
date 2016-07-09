@@ -27,7 +27,7 @@ describe 'firefox::default' do
     end
   when 'debian'
     describe command('iceweasel -v') do
-      its(:stdout) { should match(/Mozilla Iceweasel /) }
+      its(:stdout) { should match(/Mozilla Firefox /) }
       its(:exit_status) { should eq 0 }
     end
   else # linux
