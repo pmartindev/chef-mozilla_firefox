@@ -1,11 +1,12 @@
 language: ruby
+cache: bundler
+
+sudo: required
 
 rvm:
   - 2.1.7
 
 os: osx
-
-sudo: required
 
 #matrix:
 #  include:
