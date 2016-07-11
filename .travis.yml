@@ -19,7 +19,7 @@ os: osx
 #    - osx_image: xcode6.2
 
 script:
-  - KITCHEN_YAML=.kitchen.localhost.yml bundle exec kitchen verify macosx
+  - KITCHEN_YAML=.kitchen.localhost.yml bundle exec kitchen verify
 
 branches:
   only:
