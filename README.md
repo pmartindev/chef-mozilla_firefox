@@ -1,10 +1,14 @@
 # Mozilla Firefox Cookbook
 
 [![Cookbook Version](http://img.shields.io/cookbook/v/mozilla_firefox.svg?style=flat-square)][cookbook]
-[![Build Status](http://img.shields.io/travis/dhoer/chef-mozilla_firefox.svg?style=flat-square)][travis]
+[![linux](http://img.shields.io/travis/dhoer/chef-mozilla_firefox/master.svg?label=linux&style=flat-square)][linux]
+[![osx](http://img.shields.io/travis/dhoer/chef-mozilla_firefox/macosx.svg?label=macosx&style=flat-square)][osx]
+[![win](https://img.shields.io/appveyor/ci/dhoer/chef-mozilla-firefox/master.svg?label=windows&style=flat-square)][win]
 
 [cookbook]: https://supermarket.chef.io/cookbooks/mozilla_firefox
-[travis]: https://travis-ci.org/dhoer/chef-mozilla_firefox
+[linux]: https://travis-ci.org/dhoer/chef-mozilla_firefox/branches
+[osx]: https://travis-ci.org/dhoer/chef-mozilla_firefox/branches
+[win]: https://ci.appveyor.com/project/dhoer/chef-mozilla-firefox 
 
 This cookbook installs Firefox browser. Mac OS X and Windows download directly from 
 Mozilla where you can specify version (e.g., `latest`, `latest-esr`, `latest-beta`, `42.0`, `38.4.0esr`, or `43.0b4`)
