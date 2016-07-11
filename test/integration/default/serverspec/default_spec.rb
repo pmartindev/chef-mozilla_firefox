@@ -16,7 +16,7 @@ describe 'firefox::default' do
       its(:exit_status) { should eq 0 }
     end
 
-    describe windows_registry_key('HKLM\SOFTWARE\Mozilla\Mozilla Firefox') do
+    describe windows_registry_key('HKLM\SOFTWARE\Mozilla\Mozilla Firefox ESR') do
       it { should exist }
       it { should have_property('CurrentVersion') }
     end

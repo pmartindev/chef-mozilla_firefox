@@ -25,7 +25,7 @@ describe 'mozilla_firefox' do
     end
 
     it 'installs 32bit version' do
-      expect(chef_run).to install_windows_package("Mozilla Firefox #{VER} (x64 en-US)").with(
+      expect(chef_run).to install_windows_package("Mozilla Firefox #{VER.gsub('esr', '')} ESR (x64 en-US)").with(
         source: "https://download-installer.cdn.mozilla.net/pub/firefox/releases/#{VER}/win64/en-US/"\
         "Firefox%20Setup%20#{VER}.exe",
         installer_type: :custom,
@@ -42,7 +42,7 @@ describe 'mozilla_firefox' do
     end
 
     it 'installs 32bit version' do
-      expect(chef_run).to install_windows_package("Mozilla Firefox #{VER} (x86 en-US)").with(
+      expect(chef_run).to install_windows_package("Mozilla Firefox #{VER.gsub('esr', '')} ESR (x86 en-US)").with(
         source: "https://download-installer.cdn.mozilla.net/pub/firefox/releases/#{VER}/win32/en-US/"\
         "Firefox%20Setup%20#{VER}.exe",
         installer_type: :custom,

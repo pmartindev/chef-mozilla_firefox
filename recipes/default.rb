@@ -6,6 +6,7 @@ end
 case node['platform']
 when 'windows'
   bit = firefox_win_64bit? ? 'x64' : 'x86'
+  version = version.include?('esr') ? "#{version.gsub('esr', '')} ESR" : version
   windows_package "Mozilla Firefox #{version} (#{bit} #{node['mozilla_firefox']['lang']})" do
     source url
     installer_type :custom
