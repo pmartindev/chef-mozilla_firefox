@@ -13,7 +13,6 @@ describe 'firefox::default' do
   when 'windows'
     describe command('cmd /c "C:\\Program Files\\Mozilla Firefox\\firefox.exe" -v | more') do
       its(:stdout) { should match(/Mozilla Firefox /) }
-      its(:exit_status) { should eq 0 }
     end
 
     describe windows_registry_key('HKLM\SOFTWARE\Mozilla\Mozilla Firefox ESR') do
