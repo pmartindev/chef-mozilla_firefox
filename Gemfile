@@ -4,7 +4,6 @@ group :lint do
   gem 'foodcritic'
   gem 'rubocop', '~> 0.0'
   gem 'winrm-fs', '~> 0.0'
-  gem 'chef', '~> 11.0'
 end
 
 group :unit do
