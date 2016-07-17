@@ -3,10 +3,14 @@ require 'spec_helper'
 describe 'mozilla_firefox' do
   context 'windows override default version and lang' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'windows', version: '2008R2') do |node|
+      ChefSpec::SoloRunner.new(platform: 'windows', version: '2008R2', step_into: ['mozilla_firefox']) do |node|
         node.set['mozilla_firefox']['version'] = '42.0'
         node.set['mozilla_firefox']['lang'] = 'fr'
       end.converge(described_recipe)
+    end
+
+    it 'calls mozilla_firefox' do
+      expect(chef_run).to install_mozilla_firefox('42.0')
     end
 
     it 'installs 64bit french version' do
@@ -21,7 +25,15 @@ describe 'mozilla_firefox' do
 
   context 'windows install 64bit esr' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'windows', version: '2008R2').converge(described_recipe)
+      ChefSpec::SoloRunner.new(
+        platform: 'windows',
+        version: '2008R2',
+        step_into: ['mozilla_firefox']
+      ).converge(described_recipe)
+    end
+
+    it 'calls mozilla_firefox' do
+      expect(chef_run).to install_mozilla_firefox('latest-esr')
     end
 
     it 'installs 32bit version' do
@@ -36,8 +48,8 @@ describe 'mozilla_firefox' do
 
   context 'windows install 32bit esr' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'windows', version: '2008R2') do |node|
-        node.set['mozilla_firefox']['32bit_only'] = true
+      ChefSpec::SoloRunner.new(platform: 'windows', version: '2008R2', step_into: ['mozilla_firefox']) do |node|
+        node.set['mozilla_firefox']['x86_only'] = true
       end.converge(described_recipe)
     end
 
@@ -53,7 +65,11 @@ describe 'mozilla_firefox' do
 
   context 'mac install of latest version' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.7.4').converge(described_recipe)
+      ChefSpec::SoloRunner.new(
+        platform: 'mac_os_x',
+        version: '10.7.4',
+        step_into: ['mozilla_firefox']
+      ).converge(described_recipe)
     end
 
     it 'installs latest version' do
@@ -65,7 +81,7 @@ describe 'mozilla_firefox' do
   end
 
   context 'linux install of latest version using package manager' do
-    let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
+    let(:chef_run) { ChefSpec::SoloRunner.new(step_into: ['mozilla_firefox']).converge(described_recipe) }
 
     it 'installs latest version' do
       expect(chef_run).to upgrade_package('firefox').with(
