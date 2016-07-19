@@ -9,5 +9,3 @@ default['mozilla_firefox']['packages'] = case node['platform']
                                          when 'rhel'
                                            %w(bzip2)
                                          end
-
-
