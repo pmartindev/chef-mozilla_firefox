@@ -81,7 +81,11 @@ describe 'mozilla_firefox' do
   end
 
   context 'linux install of latest version using package manager' do
-    let(:chef_run) { ChefSpec::SoloRunner.new(step_into: ['mozilla_firefox']).converge(described_recipe) }
+    let(:chef_run) do
+      ChefSpec::SoloRunner.new(step_into: ['mozilla_firefox']) do |node|
+        node.set['mozilla_firefox']['use_package_manager'] = true
+      end.converge(described_recipe)
+    end
 
     it 'installs latest version' do
       expect(chef_run).to upgrade_package('firefox').with(

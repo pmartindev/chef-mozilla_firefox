@@ -124,9 +124,8 @@ def linux_install(download_url)
 
   explode_tarball(cached_file, path)
 
-  link '/usr/bin/firefox' do # ~FC021
+  link new_resource.link.nil? ? '/usr/bin/firefox' : new_resource.link do # ~FC021
     to ::File.join(path, 'firefox').to_s
-    only_if { new_resource.link.nil? || new_resource.default }
   end
 
   if new_resource.link.is_a?(Array)
@@ -134,10 +133,6 @@ def linux_install(download_url)
       link lnk do
         to ::File.join(path, 'firefox').to_s
       end
-    end
-  else
-    link new_resource.link do
-      to ::File.join(path, 'firefox').to_s
     end
   end
 end
