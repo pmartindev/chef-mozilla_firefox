@@ -6,6 +6,6 @@ default['mozilla_firefox']['use_package_manager'] = false
 default['mozilla_firefox']['packages'] = case node['platform']
                                          when 'debian'
                                            %w(bzip2 libasound2 libgtk2.0-0 libdbus-glib-1-2 libxt6)
-                                         when 'rhel'
+                                         else
                                            %w(bzip2)
                                          end
