@@ -2,7 +2,7 @@ default['mozilla_firefox']['version'] = 'latest-esr'
 default['mozilla_firefox']['lang'] = 'en-US'
 default['mozilla_firefox']['32bit_only'] = false # DEPRECATED: will be dropped in next major release, use x86_only
 default['mozilla_firefox']['x86_only'] = node['mozilla_firefox']['32bit_only']
-default['mozilla_firefox']['use_package_manager'] = true
+default['mozilla_firefox']['use_package_manager'] = false
 default['mozilla_firefox']['uri'] = 'https://download.mozilla.org'
 
 case node['platform_family']
