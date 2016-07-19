@@ -120,7 +120,9 @@ def linux_install(download_url)
     action :create
   end
 
-  package new_resource.packages
+  new_resource.packages.each do |pkg|
+    package pkg
+  end
 
   explode_tarball(cached_file, path)
 
