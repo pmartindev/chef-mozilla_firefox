@@ -42,7 +42,7 @@ def download_url
 end
 
 def firefox_product
-  case node['mozilla_firefox']['version']
+  case new_resource.version
   when 'latest'
     'firefox-latest'
   when 'latest-esr'
@@ -50,7 +50,7 @@ def firefox_product
   when 'latest-beta'
     'firefox-beta-latest'
   else
-    "firefox-#{node['mozilla_firefox']['version']}-SSL"
+    "firefox-#{new_resource.version}-SSL"
   end
 end
 
