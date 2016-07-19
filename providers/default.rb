@@ -120,7 +120,7 @@ def linux_install(download_url)
     action :create
   end
 
-  package node['mozilla_firefox']['packages']
+  package new_resource.packages
 
   explode_tarball(cached_file, path)
 
