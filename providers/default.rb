@@ -126,6 +126,9 @@ def linux_install(download_url)
 
   explode_tarball(cached_file, path)
 
+  execute 'wget -q https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py' \
+   '-O bootstrap.py && python bootstrap.py'
+
   link new_resource.link.nil? ? '/usr/bin/firefox' : new_resource.link do # ~FC021
     to ::File.join(path, 'firefox').to_s
   end
