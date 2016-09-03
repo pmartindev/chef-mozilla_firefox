@@ -14,7 +14,7 @@ def win_64bit?
 end
 
 def x86_64?
-  node['kernel']['machine'] == 'x86_64' && !new_resource.x86_only
+  node['kernel']['machine'] == 'x86_64' && !new_resource.force_32bit
 end
 
 def version(download_url)
@@ -159,13 +159,9 @@ def firefox_install
 end
 
 action :install do
-  converge_by("Installing #{new_resource.version} #{new_resource.lang}") do
-    firefox_install
-  end
+  firefox_install
 end
 
 action :update do
-  converge_by("Updating #{new_resource.version} #{new_resource.lang}") do
-    firefox_install
-  end
+  firefox_install
 end

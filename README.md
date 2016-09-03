@@ -15,8 +15,14 @@ This cookbook installs Firefox browser downloaded directly from
 where you can specify version (e.g., `latest`, `latest-esr`, `latest-beta`, `42.0`, `38.4.0esr`, or `43.0b4`)
 and language with `latest-esr`and `en-US` being the defaults.
 
-Linux platforms can choose to use the package manager instead by setting `use_package_manager` to true. Note that 
-version and lang are ignored.
+
+
+This cookbook installs Firefox browser. Mac OS X and Windows download directly from Mozilla where you can specify 
+version (e.g., `latest`, `latest-esr`, `latest-beta`, `42.0`, `38.4.0esr`, or `43.0b4`) and language with 
+`latest-esr` and `en-US` being the defaults. Linux platforms default to use the package manager at this time. 
+
+Linux can install directly from Mozilla by setting `use_package_manager` to `false`, but this is experimental and
+only Ubuntu platform works at this time. 
  
 A `firefox_version` method is also available to retrieve the default version installed.
 
@@ -25,10 +31,9 @@ A `firefox_version` method is also available to retrieve the default version ins
 Chef 11+
 
 ### Platforms
-* CentOS/RHEL
-* Debian
+* CentOS/Red Hat
+* Debian/Ubuntu
 * Mac OS X
-* Ubuntu
 * Windows
 
 ### Cookbooks
@@ -57,14 +62,14 @@ e.g., `42.0`, `38.4.0esr`, or `43.0b4`. Ignored on Linux platforms when `use_pac
 Default is `latest-esr`.
 * `node['mozilla_firefox']['lang']` - Language desired. Ignored on Linux platforms when `use_package_manager` 
 is true.  Default is `en-US`.
-* `node['mozilla_firefox']['32bit_only']` - DEPRECATED! This will be dropped in next major release, use `x86_only`
+* `node['mozilla_firefox']['32bit_only']` - DEPRECATED! This will be dropped in next major release, use `force_32bit`
 instead.
-* `node['mozilla_firefox']['x86_only']` - Install 32-bit browser on 64-bit machines. Linux and Windows platforms 
-only. Default is `false`.
+* `node['mozilla_firefox']['force_32bit']` - Install 32-bit browser on 64-bit machines. Ignored on Mac OS X and package 
+installs. Default `false`.
 * `node['mozilla_firefox']['use_package_manager']` - Install using apt or yum package manager. Linux platform only. 
-Default is `false`.
-* `node['mozilla_firefox']['packages']` - Dependency packages. Linux platform only. Default is 
-`%w(libasound2 libgtk2.0-0 libdbus-glib-1-2 libxt6)`.
+Default is `true`.
+* `node['mozilla_firefox']['packages']` - Dependency packages for experimental non-package installs. 
+Linux platform only. Default values depend on Linux platform.
 
 
 # Resources
@@ -75,27 +80,21 @@ Default is `false`.
 * `version` - Install `latest`, `latest-esr`, `latest-beta`, or specific version e.g., `42.0`, `38.4.0esr`, or `43.0b4`. 
 Ignored on Linux platforms when `use_package_manager` is true. 
 * `checksum` - SHA256 Checksum of the file. Not required.
-* `lang` - Language desired. Ignored on Linux platforms when `use_package_manager` is true.  Default is `en-US`.
-* `path` - Path to install Firefox. Defaults to: /opt/firefox/#{version}_#{language}
-splay - Time in minutes to wait before next contact to Mozilla servers. Not required, defaults to 0 (zero) seconds.
-link - Create the specfied symlink (Linux Only). This can be an array to create multiple symlinks to the same instance, or a string for a single symlink.
-
-
-attribute(:version, kind_of: String, name_attribute: true)
-attribute(:checksum, kind_of: String)
-attribute(:lang, kind_of: String, default: lazy { node['mozilla_firefox']['lang'] })
-attribute(:x86_only, kind_of: [TrueClass, FalseClass], default: lazy { node['mozilla_firefox']['x86_only'] })
-attribute(:use_package_manager, kind_of: [TrueClass, FalseClass],
-                                default: lazy { node['mozilla_firefox']['use_package_manager'] })
-attribute(:path, kind_of: [String, NilClass])
-attribute(:link, kind_of: [String, Array, NilClass])
-attribute(:packages, kind_of: [Array, NilClass], default: lazy { node['mozilla_firefox']['packages'] })
-attribute(:windows_ini_source, kind_of: String, default: 'windows.ini.erb')
-attribute(:windows_ini_content, kind_of: String, default: lazy { { InstallDirectoryPath: :path } })
-attribute(:windows_ini_cookbook, kind_of: String, default: 'mozilla_firefox')
+* `lang` - Language desired. Ignored on Linux platforms when `use_package_manager` is `true`.  Default is `en-US`.
+* `force_32bit` -  Install 32-bit browser on 64-bit machines. Ignored on Mac OS X and package installs. Default `false`.
+* `path` - Path to install Firefox. Linux: `/opt/firefox/#{version}_#{language}`, Windows: 
+`#{ENV['SYSTEMDRIVE']}\\Program Files\\Mozilla Firefox\\firefox.exe` when nil. Default `nil`.
+* `use_package_manager` - Install using apt or yum package manager. Linux platform only. Default is `true`.
+* `link` - Create the specfied symlink (Linux Only). This can be an array to create multiple symlinks to the same 
+instance, or a string for a single symlink. Default `nil`.
+* `packages` - Dependency packages for experimental non-package installs. Linux platform only. Default values depend 
+on Linux platform.
+* `windows_ini_source` - Template source. Default `windows.ini.erb`.
+* `windows_ini_content` -  Template content. Default `InstallDirectoryPath: :path`.
+* `windows_ini_cookbook` - Template cookbook. Default `mozilla_firefox`.
 
 ## Getting Help
-* Ask specific questions on [Stack Overflow](http://stackoverflow.com/questions/tagged/firefox).
+* Ask specific questions on [Stack Overflow](http://stackoverflow.com/questions/tagged/chef+firefox).
 * Report bugs and discuss potential features in [Github issues](https://github.com/dhoer/chef-mozilla_firefox/issues).
 
 ## Contributing

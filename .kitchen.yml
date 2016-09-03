@@ -34,7 +34,7 @@ suites:
       - recipe[mozilla_firefox_test::version]
     attributes:
       mozilla_firefox:
-        x86_only: true
+        force_32bit: true
     excludes:
      - ubuntu-12.04
      - ubuntu-14.04

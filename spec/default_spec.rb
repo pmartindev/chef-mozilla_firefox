@@ -4,8 +4,8 @@ describe 'mozilla_firefox' do
   context 'windows override default version and lang' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'windows', version: '2008R2', step_into: ['mozilla_firefox']) do |node|
-        node.set['mozilla_firefox']['version'] = '42.0'
-        node.set['mozilla_firefox']['lang'] = 'fr'
+        node.override['mozilla_firefox']['version'] = '42.0'
+        node.override['mozilla_firefox']['lang'] = 'fr'
       end.converge(described_recipe)
     end
 
@@ -49,7 +49,7 @@ describe 'mozilla_firefox' do
   context 'windows install 32bit esr' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'windows', version: '2008R2', step_into: ['mozilla_firefox']) do |node|
-        node.set['mozilla_firefox']['x86_only'] = true
+        node.override['mozilla_firefox']['force_32bit'] = true
       end.converge(described_recipe)
     end
 
@@ -83,7 +83,7 @@ describe 'mozilla_firefox' do
   context 'linux install of latest version using package manager' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(step_into: ['mozilla_firefox']) do |node|
-        node.set['mozilla_firefox']['use_package_manager'] = true
+        node.override['mozilla_firefox']['use_package_manager'] = true
       end.converge(described_recipe)
     end
 

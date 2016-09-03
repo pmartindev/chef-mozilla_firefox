@@ -4,7 +4,7 @@ default_action :install
 attribute(:version, kind_of: String, name_attribute: true)
 attribute(:checksum, kind_of: String)
 attribute(:lang, kind_of: String, default: lazy { node['mozilla_firefox']['lang'] })
-attribute(:x86_only, kind_of: [TrueClass, FalseClass], default: lazy { node['mozilla_firefox']['x86_only'] })
+attribute(:force_32bit, kind_of: [TrueClass, FalseClass], default: lazy { node['mozilla_firefox']['force_32bit'] })
 attribute(:use_package_manager, kind_of: [TrueClass, FalseClass],
                                 default: lazy { node['mozilla_firefox']['use_package_manager'] })
 attribute(:path, kind_of: [String, NilClass])
