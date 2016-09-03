@@ -6,7 +6,7 @@ group :lint do
 end
 
 group :unit do
-  gem 'berkshelf',  '~> 4.0' # pin to 3.1.5 due to performance issues when testing osx
+  gem 'berkshelf', '~> 4.0' # pin to 3.1.5 due to performance issues when testing osx
   gem 'chefspec'
 end
 
