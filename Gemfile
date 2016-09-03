@@ -2,13 +2,12 @@ source 'https://rubygems.org'
 
 group :lint do
   gem 'foodcritic'
-  gem 'rubocop', '~> 0.0'
-  gem 'winrm-fs', '~> 0.0'
+  gem 'rubocop'
 end
 
 group :unit do
   gem 'berkshelf',  '~> 4.0' # pin to 3.1.5 due to performance issues when testing osx
-  gem 'chefspec',   '~> 4.0'
+  gem 'chefspec'
 end
 
 group :integration do
