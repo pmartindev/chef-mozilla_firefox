@@ -4,7 +4,7 @@ default['mozilla_firefox']['lang'] = 'en-US'
 default['mozilla_firefox']['32bit_only'] = false # DEPRECATED! use force_32bit
 default['mozilla_firefox']['force_32bit'] = node['mozilla_firefox']['32bit_only']
 
-default['mozilla_firefox']['use_package_manager'] = false
+default['mozilla_firefox']['use_package_manager'] = true
 default['mozilla_firefox']['packages'] = case node['platform_family']
                                          when 'debian'
                                            %w(bzip2 libasound2 libgtk2.0-0 libdbus-glib-1-2 libxt6)
