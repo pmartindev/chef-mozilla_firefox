@@ -1,8 +1,13 @@
 # CHANGELOG
 
+## 1.2.0 2016-09-03
+
+- Allow for multiple version installs 
+- Add experimental non-package install for Linux - only Ubuntu platform works at this time
+
 ## 1.1.1 2016-07-11
 
-- Fix Windows ESR versions always re-install
+- Fix #4 Windows ESR versions always re-install
 
 ## 1.1.0 2016-03-21
 

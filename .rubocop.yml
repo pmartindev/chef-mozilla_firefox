@@ -7,3 +7,6 @@ LineLength:
 
 Metrics/AbcSize:
   Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
