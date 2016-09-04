@@ -4,7 +4,7 @@ maintainer_email 'dennis.hoer@gmail.com'
 license 'MIT'
 description 'Installs Mozilla Firefox browser'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '1.1.1'
+version '1.2.0'
 
 %w(redhat centos windows mac_os_x debian ubuntu).each do |os|
   supports os
