@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.0 2016-09-20
+
+- Fix #6 Firefox no longer installing causing Repice compile error
+
 ## 1.2.0 2016-09-03
 
 - Allow for multiple version installs 

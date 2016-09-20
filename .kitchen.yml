@@ -23,15 +23,12 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[mozilla_firefox_test::default]
-      - recipe[mozilla_firefox_test::version]
-      - recipe[mozilla_firefox_test::x11]
+      - mozilla_firefox
     attributes:
 
   - name: windows_32bit_only
     run_list:
-      - recipe[mozilla_firefox_test::default]
-      - recipe[mozilla_firefox_test::version]
+      - mozilla_firefox
     attributes:
       mozilla_firefox:
         force_32bit: true
