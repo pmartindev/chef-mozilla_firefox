@@ -130,13 +130,11 @@ def linux_install(download_url)
     to ::File.join(path, 'firefox').to_s
   end
 
-  if new_resource.link.is_a?(Array)
-    new_resource.link.each do |lnk|
-      link lnk do
-        to ::File.join(path, 'firefox').to_s
-      end
+  new_resource.link.each do |lnk|
+    link lnk do
+      to ::File.join(path, 'firefox').to_s
     end
-  end
+  end if new_resource.link.is_a?(Array)
 end
 
 def firefox_install
