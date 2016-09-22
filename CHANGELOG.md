@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.3 2016-09-21
+
+- Fix system cannot find the path specified on Windows
+
 ## 1.2.2 2016-09-21
 
 - Fix 'firefox' is not recognized as an internal or external command on Windows

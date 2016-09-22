@@ -1,13 +1,15 @@
 # MozillaFirefox helper
 module MozillaFirefox
-  def firefox_version(_url = nil)
+  def firefox_version(url = nil)
+    return url.match(/(-|%20)([\d|.]*).(exe|dmg|tar\.bz2)/)[2] if url # http://rubular.com/r/thFO453EZZ
+
     case node['platform']
     when 'windows'
       begin
-        firefox_shellout('firefox -v | more').match(/Mozilla Firefox (.*)/)[1]
+        firefox_shellout("\"#{ENV['ProgramFiles(x86)']}\\Mozilla Firefox\\firefox.exe\" -v | more")
+          .match(/Mozilla Firefox (.*)/)[1]
       rescue
-        program_files = node['kernel']['machine'] == 'x86_64' ? ENV['ProgramW6432'] : ENV['ProgramFiles']
-        firefox_shellout("\"#{program_files}\\Mozilla Firefox\\firefox.exe\" -v | more")
+        firefox_shellout("\"#{ENV['ProgramFiles']}\\Mozilla Firefox\\firefox.exe\" -v | more")
           .match(/Mozilla Firefox (.*)/)[1]
       end
     when 'debian'
