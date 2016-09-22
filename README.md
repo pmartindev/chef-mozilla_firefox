@@ -68,6 +68,9 @@ Linux platform only. Default values depend on Linux platform.
 
 # Resources
 
+Use mozilla_firefox resource to install multiple versions of firefox on the same server.  Note that firefox_version
+method should not be used when multiple firefox versions are installed.
+
 ## mozilla_firefox
 
 ### Attributes
