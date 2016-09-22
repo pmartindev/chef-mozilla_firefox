@@ -1,8 +1,12 @@
 # CHANGELOG
 
-## 1.2.0 2016-09-20
+## 1.2.2 2016-09-21
 
-- Fix #6 Firefox no longer installing causing Repice compile error
+- Fix 'firefox' is not recognized as an internal or external command on Windows
+
+## 1.2.1 2016-09-20
+
+- Fix #6 Firefox no longer installing causing Recipe compile error
 
 ## 1.2.0 2016-09-03
 

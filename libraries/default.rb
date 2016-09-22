@@ -3,7 +3,13 @@ module MozillaFirefox
   def firefox_version(_url = nil)
     case node['platform']
     when 'windows'
-      firefox_shellout('firefox -v | more').match(/Mozilla Firefox (.*)/)[1]
+      begin
+        firefox_shellout('firefox -v | more').match(/Mozilla Firefox (.*)/)[1]
+      rescue
+        program_files = node['kernel']['machine'] == 'x86_64' ? ENV['ProgramW6432'] : ENV['ProgramFiles']
+        firefox_shellout("\"#{program_files}\\Mozilla Firefox\\firefox.exe\" -v | more")
+          .match(/Mozilla Firefox (.*)/)[1]
+      end
     when 'debian'
       begin
         firefox_shellout('iceweasel -v').match(/Mozilla Firefox (.*)/)[1]

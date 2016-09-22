@@ -17,6 +17,5 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[mozilla_firefox_test::default]
-      - recipe[mozilla_firefox_test::version]
+      - mozilla_firefox_test
     attributes:
