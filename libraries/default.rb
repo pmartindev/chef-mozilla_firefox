@@ -29,7 +29,7 @@ module MozillaFirefox
     cmd = Mixlib::ShellOut.new(command)
     cmd.run_command
     cmd.error!
-    cmd.stdout
+    cmd.stdout.strip
   end
 end
 
