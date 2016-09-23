@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.4 2016-09-23
+
+- Fix #8 Remove carriage return characters from firefox_version
+
 ## 1.2.3 2016-09-21
 
 - Fix system cannot find the path specified on Windows
