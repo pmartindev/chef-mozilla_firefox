@@ -11,7 +11,7 @@ group :unit do
 end
 
 group :integration do
-  gem 'test-kitchen', '~> 1.0'
+  gem 'test-kitchen', '~> 1.12'
   gem 'kitchen-vagrant', '~> 0.0'
   gem 'winrm-fs', '~> 1.0'
   gem 'kitchen-dokken', '~> 0.0'

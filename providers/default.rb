@@ -93,6 +93,7 @@ def windows_install(download_url)
   # https://wiki.mozilla.org/Installer:Command_Line_Arguments
   windows_package "Mozilla Firefox #{win_long_version(version(download_url))} (#{bit} #{new_resource.lang})" do
     source download_url
+    retries new_resource.retries
     installer_type :custom
     options options
     checksum new_resource.checksum unless new_resource.checksum.nil?
@@ -105,6 +106,7 @@ def osx_install(download_url)
     dmg_name 'firefox'
     destination new_resource.path unless new_resource.path.nil?
     source download_url
+    retries new_resource.retries
     checksum new_resource.checksum unless new_resource.checksum.nil?
     action :install
   end
@@ -116,6 +118,7 @@ def linux_install(download_url)
 
   remote_file cached_file do
     source download_url
+    retries new_resource.retries
     checksum new_resource.checksum unless new_resource.checksum.nil?
     action :create
   end
@@ -151,6 +154,7 @@ def firefox_install
   else
     # install at compile time so version is available during convergence
     package platform_family?('debian') ? 'iceweasel' : 'firefox' do
+      retries new_resource.retries
       action :nothing
     end.run_action(:upgrade)
   end

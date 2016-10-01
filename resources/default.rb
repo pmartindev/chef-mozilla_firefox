@@ -3,6 +3,7 @@ default_action :install
 
 attribute(:version, kind_of: String, name_attribute: true)
 attribute(:checksum, kind_of: String)
+attribute(:retries, kind_of: Integer, default: 5)
 attribute(:lang, kind_of: String, default: lazy { node['mozilla_firefox']['lang'] })
 attribute(:force_32bit, kind_of: [TrueClass, FalseClass], default: lazy { node['mozilla_firefox']['force_32bit'] })
 attribute(:use_package_manager, kind_of: [TrueClass, FalseClass],
