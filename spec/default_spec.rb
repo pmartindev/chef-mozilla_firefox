@@ -82,7 +82,7 @@ describe 'mozilla_firefox' do
 
   context 'linux install of latest version using package manager' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(step_into: ['mozilla_firefox']) do |node|
+      ChefSpec::SoloRunner.new(platform: 'centos', version: '7.0', step_into: ['mozilla_firefox']) do |node|
         node.override['mozilla_firefox']['use_package_manager'] = true
       end.converge(described_recipe)
     end
