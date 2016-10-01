@@ -15,10 +15,10 @@ platforms:
         version: latest # latest-esr doesn't have 64bit version
   - name: ubuntu-12.04
   - name: ubuntu-14.04
-  - name: centos-6.7
-  - name: centos-7.1
-  - name: debian-7.8
-  - name: debian-8.1
+  - name: centos-6.8
+  - name: centos-7.2
+  - name: debian-7.11
+  - name: debian-8.5
 
 suites:
   - name: default
@@ -35,7 +35,7 @@ suites:
     excludes:
      - ubuntu-12.04
      - ubuntu-14.04
-     - centos-6.7
-     - centos-7.1
-     - debian-7.8
-     - debian-8.1
+     - centos-6.8
+     - centos-7.2
+     - debian-7.11
+     - debian-8.5

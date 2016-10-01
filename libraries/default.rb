@@ -6,10 +6,10 @@ module MozillaFirefox
     case node['platform']
     when 'windows'
       begin
-        firefox_shellout("\"#{ENV['ProgramFiles(x86)']}\\Mozilla Firefox\\firefox.exe\" -v | more")
+        firefox_shellout("\"#{ENV['SystemDrive']}\\Program Files\\Mozilla Firefox\\firefox.exe\" -v | more")
           .match(/Mozilla Firefox (.*)/)[1]
       rescue
-        firefox_shellout("\"#{ENV['ProgramFiles']}\\Mozilla Firefox\\firefox.exe\" -v | more")
+        firefox_shellout("\"#{ENV['SystemDrive']}\\Program Files (x86)\\Mozilla Firefox\\firefox.exe\" -v | more")
           .match(/Mozilla Firefox (.*)/)[1]
       end
     when 'debian'
@@ -28,7 +28,6 @@ module MozillaFirefox
   def firefox_shellout(command)
     cmd = Mixlib::ShellOut.new(command)
     cmd.run_command
-    cmd.error!
     cmd.stdout.strip
   end
 end

@@ -2,6 +2,7 @@
 
 ## 1.2.4 2016-09-23
 
+- Fix #10 Recipe fails on x64 install
 - Fix #8 Remove carriage return characters from firefox_version
 - Fix #7 Retry (up to 5 times) when download fails
 
