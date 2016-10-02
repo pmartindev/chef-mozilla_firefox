@@ -22,7 +22,7 @@ A `firefox_version` method is also available to retrieve the default version ins
 
 ## Requirements
 
-Chef 11+
+Chef 12.6+
 
 ### Platforms
 * CentOS/Red Hat
@@ -31,7 +31,6 @@ Chef 11+
 * Windows
 
 ### Cookbooks
-* windows
 * dmg
 
 ## Usage
