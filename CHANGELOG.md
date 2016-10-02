@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2.0.0 - 2016-10-01
+## 2.0.0 2016-10-01
 
 - Drop support for Chef 11
 
