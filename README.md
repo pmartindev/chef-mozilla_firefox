@@ -13,7 +13,7 @@
 This cookbook installs Firefox browser. Mac OS X, Ubuntu, and Windows download directly from 
 [Mozilla](https://download-installer.cdn.mozilla.net/pub/firefox/releases/latest/README.txt) where you can specify 
 version (e.g., `latest`, `latest-esr`, `latest-beta`, `42.0`, `38.4.0esr`, or `43.0b4`) and language with 
-`latest-esr` and `en-US` being the defaults. Other linux platforms default to using the package manager.
+`latest-esr` and `en-US` being the defaults. CentOS/Red Hat and Debian platforms default to using the package manager.
  
 A `firefox_version` method is also available to retrieve the default version installed.
 
@@ -56,9 +56,9 @@ is true.  Default is `en-US`.
 instead.
 * `node['mozilla_firefox']['force_32bit']` - Install 32-bit browser on 64-bit machines. Ignored on Mac OS X and package 
 installs. Default `false`.
-* `node['mozilla_firefox']['use_package_manager']` - Install using apt or yum package manager. Linux platform only. 
+* `node['mozilla_firefox']['use_package_manager']` - Install using apt or yum package manager. CentOS/Red Hat and Debian platforms only. 
 Default is `true`.
-* `node['mozilla_firefox']['packages']` - Dependency packages for experimental non-package installs. 
+* `node['mozilla_firefox']['packages']` - Dependency packages for non-package installs. 
 Linux platform only. Default values depend on Linux platform.
 
 
@@ -77,10 +77,10 @@ Ignored on Linux platforms when `use_package_manager` is true.
 * `force_32bit` -  Install 32-bit browser on 64-bit machines. Ignored on Mac OS X and package installs. Default `false`.
 * `path` - Path to install Firefox. Linux: `/opt/firefox/#{version}_#{language}`, Windows: 
 `#{ENV['SYSTEMDRIVE']}\\Program Files\\Mozilla Firefox\\firefox.exe` when nil. Default `nil`.
-* `use_package_manager` - Install using apt or yum package manager. Linux platform only. Default is `true`.
+* `use_package_manager` - Install using apt or yum package manager. CentOS/Red Hat and Debian platforms only. Default is `true`.
 * `link` - Create the specfied symlink (Linux Only). This can be an array to create multiple symlinks to the same 
 instance, or a string for a single symlink. Default `nil`.
-* `packages` - Dependency packages for experimental non-package installs. Linux platform only. Default values depend 
+* `packages` - Dependency packages for non-package installs. Linux platform only. Default values depend 
 on Linux platform.
 * `windows_ini_source` - Template source. Default `windows.ini.erb`.
 * `windows_ini_content` -  Template content. Default `InstallDirectoryPath: :path`.
