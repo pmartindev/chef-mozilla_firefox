@@ -3,7 +3,7 @@
 ## 2.1.0 2017-01-28
 
 - Replace iceweasel package with firefox-esr on debian platform
-- Ensure package install uses firefox-esr when version includes esr
+- Ensure package install uses firefox-esr when version includes esr on ubuntu platform
 
 ## 2.0.0 2016-10-01
 

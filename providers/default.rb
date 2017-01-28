@@ -137,11 +137,13 @@ def linux_install(download_url)
     to ::File.join(path, 'firefox').to_s
   end
 
+  return unless new_resource.link.is_a?(Array)
+
   new_resource.link.each do |lnk|
     link lnk do
       to ::File.join(path, 'firefox').to_s
     end
-  end if new_resource.link.is_a?(Array)
+  end
 end
 
 def firefox_install
@@ -156,8 +158,9 @@ def firefox_install
       linux_install(url)
     end
   else
+    pkg = platform_family?('debian') || platform_family?('ubuntu') && esr_version? ? 'firefox-esr' : 'firefox'
     # install at compile time so version is available during convergence
-    package platform_family?('debian') || esr_version? ? 'firefox-esr' : 'firefox' do
+    package pkg do
       retries new_resource.retries
       action :nothing
     end.run_action(:upgrade)

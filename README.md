@@ -13,7 +13,9 @@
 This cookbook installs Firefox browser. Mac OS X and Windows download directly from 
 [Mozilla](https://download-installer.cdn.mozilla.net/pub/firefox/releases/latest/README.txt) where you can specify 
 version (e.g., `latest`, `latest-esr`, `latest-beta`, `42.0`, `38.4.0esr`, or `43.0b4`) and language with 
-`latest-esr` and `en-US` being the defaults. Linux platforms default to use the package manager. 
+`latest-esr` and `en-US` being the defaults. Linux platforms default to useing the package manager. 
+Package manager installs firefox-esr with Ubuntu being the exception. 
+Ubuntu will install latest version unless version contains esr, it will then install the latest esr version.
 
 Linux can install directly from Mozilla by setting `use_package_manager` to `false`, but this is experimental and
 only Ubuntu platform works at this time. 
