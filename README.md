@@ -13,7 +13,7 @@
 This cookbook installs Firefox browser. Mac OS X, Ubuntu, and Windows download directly from 
 [Mozilla](https://download-installer.cdn.mozilla.net/pub/firefox/releases/latest/README.txt) where you can specify 
 version (e.g., `latest`, `latest-esr`, `latest-beta`, `42.0`, `38.4.0esr`, or `43.0b4`) and language with 
-`latest-esr` and `en-US` being the defaults. CentOS/Red Hat and Debian platforms default to using the package manager.
+`latest-esr` and `en-US` being the defaults. CentOS, Red Hat and Debian platforms default to using the package manager.
  
 A `firefox_version` method is also available to retrieve the default version installed.
 
@@ -48,15 +48,15 @@ allow_any_instance_of(Chef::Recipe).to receive(:firefox_version).and_return('42.
 
 ### Attributes
 * `node['mozilla_firefox']['version']` - Install `latest`, `latest-esr`, `latest-beta`, or specific version 
-e.g., `42.0`, `38.4.0esr`, or `43.0b4`. Ignored on Linux platforms when `use_package_manager` is true. 
+e.g., `42.0`, `38.4.0esr`, or `43.0b4`. Ignored on CentOS, Red Hat and Debian platforms when `use_package_manager` is true. 
 Default is `latest-esr`.
-* `node['mozilla_firefox']['lang']` - Language desired. Ignored on Linux platforms when `use_package_manager` 
+* `node['mozilla_firefox']['lang']` - Language desired. Ignored on CentOS, Red Hat and Debian platforms when `use_package_manager` 
 is true.  Default is `en-US`.
 * `node['mozilla_firefox']['32bit_only']` - DEPRECATED! This will be dropped in next major release, use `force_32bit`
 instead.
 * `node['mozilla_firefox']['force_32bit']` - Install 32-bit browser on 64-bit machines. Ignored on Mac OS X and package 
 installs. Default `false`.
-* `node['mozilla_firefox']['use_package_manager']` - Install using apt or yum package manager. CentOS/Red Hat and Debian platforms only. 
+* `node['mozilla_firefox']['use_package_manager']` - Install using apt or yum package manager. CentOS, Red Hat and Debian platforms only. 
 Default is `true`.
 * `node['mozilla_firefox']['packages']` - Dependency packages for non-package installs. 
 Linux platform only. Default values depend on Linux platform.
@@ -71,16 +71,16 @@ method should not be used when multiple firefox versions are installed.
 
 ### Attributes
 * `version` - Install `latest`, `latest-esr`, `latest-beta`, or specific version e.g., `42.0`, `38.4.0esr`, or `43.0b4`. 
-Ignored on Linux platforms when `use_package_manager` is true. 
+Ignored on CentOS, Red Hat and Debian platforms when `use_package_manager` is true. 
 * `checksum` - SHA256 Checksum of the file. Not required.
-* `lang` - Language desired. Ignored on Linux platforms when `use_package_manager` is `true`.  Default is `en-US`.
+* `lang` - Language desired. Ignored on CentOS, Red Hat and Debian platforms when `use_package_manager` is `true`.  Default is `en-US`.
 * `force_32bit` -  Install 32-bit browser on 64-bit machines. Ignored on Mac OS X and package installs. Default `false`.
 * `path` - Path to install Firefox. Linux: `/opt/firefox/#{version}_#{language}`, Windows: 
 `#{ENV['SYSTEMDRIVE']}\\Program Files\\Mozilla Firefox\\firefox.exe` when nil. Default `nil`.
 * `use_package_manager` - Install using apt or yum package manager. CentOS/Red Hat and Debian platforms only. Default is `true`.
-* `link` - Create the specfied symlink (Linux Only). This can be an array to create multiple symlinks to the same 
+* `link` - Create the specfied symlink (Linux non-package installs only). This can be an array to create multiple symlinks to the same 
 instance, or a string for a single symlink. Default `nil`.
-* `packages` - Dependency packages for non-package installs. Linux platform only. Default values depend 
+* `packages` - Dependency packages for non-package installs. CentOS, Red Hat and Debian platforms only. Default values depend 
 on Linux platform.
 * `windows_ini_source` - Template source. Default `windows.ini.erb`.
 * `windows_ini_content` -  Template content. Default `InstallDirectoryPath: :path`.
