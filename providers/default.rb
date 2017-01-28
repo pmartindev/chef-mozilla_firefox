@@ -143,7 +143,7 @@ def linux_install(download_url)
 end
 
 def firefox_install
-  if platform_family?('windows', 'mac_os_x') || platform?('ubuntu') || !new_resource.use_package_manager
+  if platform?('windows', 'mac_os_x', 'ubuntu') || !new_resource.use_package_manager
     url = download_url
     case node['platform']
     when 'windows'
