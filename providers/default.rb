@@ -29,10 +29,6 @@ def latest_version?
   new_resource.version.include?('latest')
 end
 
-def esr_version?
-  new_resource.version.include?('esr')
-end
-
 # Returns resolved download url, e.g.,
 # https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US ->
 # http://download.cdn.mozilla.net/pub/firefox/releases/47.0.1/linux-x86_64/en-US/firefox-47.0.1.tar.bz2
@@ -147,7 +143,7 @@ def linux_install(download_url)
 end
 
 def firefox_install
-  if platform_family?('windows', 'mac_os_x') || !new_resource.use_package_manager
+  if platform_family?('windows', 'mac_os_x', 'ubuntu') || !new_resource.use_package_manager
     url = download_url
     case node['platform']
     when 'windows'
@@ -158,7 +154,7 @@ def firefox_install
       linux_install(url)
     end
   else
-    pkg = platform_family?('debian') || platform_family?('ubuntu') && esr_version? ? 'firefox-esr' : 'firefox'
+    pkg = platform_family?('debian') ? 'firefox-esr' : 'firefox'
     # install at compile time so version is available during convergence
     package pkg do
       retries new_resource.retries
