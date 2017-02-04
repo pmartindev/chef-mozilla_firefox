@@ -1,9 +1,17 @@
 # MozillaFirefox helper
 module MozillaFirefox
-  def firefox_version(_url = nil)
+  def firefox_version(url = nil)
+    return url.match(/(-|%20)([\d|.]*).(exe|dmg|tar\.bz2)/)[2] if url # http://rubular.com/r/thFO453EZZ
+
     case node['platform']
     when 'windows'
-      firefox_shellout('firefox -v | more').match(/Mozilla Firefox (.*)/)[1]
+      begin
+        firefox_shellout("\"#{ENV['SystemDrive']}\\Program Files\\Mozilla Firefox\\firefox.exe\" -v | more")
+          .match(/Mozilla Firefox (.*)/)[1]
+      rescue
+        firefox_shellout("\"#{ENV['SystemDrive']}\\Program Files (x86)\\Mozilla Firefox\\firefox.exe\" -v | more")
+          .match(/Mozilla Firefox (.*)/)[1]
+      end
     when 'debian'
       begin
         firefox_shellout('iceweasel -v').match(/Mozilla Firefox (.*)/)[1]
@@ -20,8 +28,7 @@ module MozillaFirefox
   def firefox_shellout(command)
     cmd = Mixlib::ShellOut.new(command)
     cmd.run_command
-    cmd.error!
-    cmd.stdout
+    cmd.stdout.strip
   end
 end
 

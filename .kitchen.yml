@@ -15,30 +15,27 @@ platforms:
         version: latest # latest-esr doesn't have 64bit version
   - name: ubuntu-12.04
   - name: ubuntu-14.04
-  - name: centos-6.7
-  - name: centos-7.1
-  - name: debian-7.8
-  - name: debian-8.1
+  - name: centos-6.8
+  - name: centos-7.2
+  - name: debian-7.11
+  - name: debian-8.5
 
 suites:
   - name: default
     run_list:
-      - recipe[mozilla_firefox_test::default]
-      - recipe[mozilla_firefox_test::version]
-      - recipe[mozilla_firefox_test::x11]
+      - mozilla_firefox_test
     attributes:
 
   - name: windows_32bit_only
     run_list:
-      - recipe[mozilla_firefox_test::default]
-      - recipe[mozilla_firefox_test::version]
+      - mozilla_firefox_test
     attributes:
       mozilla_firefox:
         force_32bit: true
     excludes:
      - ubuntu-12.04
      - ubuntu-14.04
-     - centos-6.7
-     - centos-7.1
-     - debian-7.8
-     - debian-8.1
+     - centos-6.8
+     - centos-7.2
+     - debian-7.11
+     - debian-8.5

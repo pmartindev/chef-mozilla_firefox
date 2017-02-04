@@ -1,5 +1,32 @@
 # CHANGELOG
 
+## 2.1.0 2017-01-28
+
+- Replace iceweasel package with firefox-esr on debian platform
+- Ubuntu no longer defaults to using package manager
+
+## 2.0.0 2016-10-01
+
+- Drop support for Chef 11
+
+## 1.2.4 2016-09-23
+
+- Fix #10 Recipe fails on x64 install
+- Fix #8 Remove carriage return characters from firefox_version
+- Fix #7 Retry (up to 5 times) when download fails
+
+## 1.2.3 2016-09-21
+
+- Fix system cannot find the path specified on Windows
+
+## 1.2.2 2016-09-21
+
+- Fix 'firefox' is not recognized as an internal or external command on Windows
+
+## 1.2.1 2016-09-20
+
+- Fix #6 Firefox no longer installing causing Recipe compile error
+
 ## 1.2.0 2016-09-03
 
 - Allow for multiple version installs 

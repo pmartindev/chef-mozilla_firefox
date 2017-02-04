@@ -93,6 +93,7 @@ def windows_install(download_url)
   # https://wiki.mozilla.org/Installer:Command_Line_Arguments
   windows_package "Mozilla Firefox #{win_long_version(version(download_url))} (#{bit} #{new_resource.lang})" do
     source download_url
+    retries new_resource.retries
     installer_type :custom
     options options
     checksum new_resource.checksum unless new_resource.checksum.nil?
@@ -105,6 +106,7 @@ def osx_install(download_url)
     dmg_name 'firefox'
     destination new_resource.path unless new_resource.path.nil?
     source download_url
+    retries new_resource.retries
     checksum new_resource.checksum unless new_resource.checksum.nil?
     action :install
   end
@@ -116,6 +118,7 @@ def linux_install(download_url)
 
   remote_file cached_file do
     source download_url
+    retries new_resource.retries
     checksum new_resource.checksum unless new_resource.checksum.nil?
     action :create
   end
@@ -130,17 +133,17 @@ def linux_install(download_url)
     to ::File.join(path, 'firefox').to_s
   end
 
-  if new_resource.link.is_a?(Array)
-    new_resource.link.each do |lnk|
-      link lnk do
-        to ::File.join(path, 'firefox').to_s
-      end
+  return unless new_resource.link.is_a?(Array)
+
+  new_resource.link.each do |lnk|
+    link lnk do
+      to ::File.join(path, 'firefox').to_s
     end
   end
 end
 
 def firefox_install
-  if platform_family?('windows', 'mac_os_x') || !new_resource.use_package_manager
+  if platform?('windows', 'mac_os_x', 'ubuntu') || !new_resource.use_package_manager
     url = download_url
     case node['platform']
     when 'windows'
@@ -151,8 +154,10 @@ def firefox_install
       linux_install(url)
     end
   else
+    pkg = platform_family?('debian') ? 'firefox-esr' : 'firefox'
     # install at compile time so version is available during convergence
-    package platform_family?('debian') ? 'iceweasel' : 'firefox' do
+    package pkg do
+      retries new_resource.retries
       action :nothing
     end.run_action(:upgrade)
   end
