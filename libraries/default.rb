@@ -18,6 +18,8 @@ module MozillaFirefox
       rescue
         firefox_shellout('firefox -v').match(/Mozilla Firefox (.*)/)[1]
       end
+    when 'mac_os_x'
+      firefox_shellout('/Applications/Firefox.app/Contents/MacOS/firefox -v')
     else
       firefox_shellout('firefox -v').match(/Mozilla Firefox (.*)/)[1]
     end

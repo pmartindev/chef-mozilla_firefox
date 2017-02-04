@@ -8,14 +8,14 @@ group :lint do
 end
 
 group :unit do
-  gem 'berkshelf', '~> 4.0' # pin to 3.1.5 due to performance issues when testing osx
+  gem 'berkshelf'
   gem 'chefspec'
 end
 
 group :integration do
-  gem 'kitchen-dokken', '~> 0.0'
-  gem 'kitchen-localhost', '~> 0.0'
-  gem 'kitchen-vagrant', '~> 0.0'
-  gem 'test-kitchen', '~> 1.12'
-  gem 'winrm-fs', '~> 1.0'
+  gem 'kitchen-dokken'
+  gem 'kitchen-localhost'
+  gem 'kitchen-vagrant'
+  gem 'test-kitchen', '~> 1.13.0'
+  gem 'winrm-fs'
 end

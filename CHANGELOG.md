@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.1.1 2017-02-04
+
+- Fix #13 firefox_version throws exception on macosx
+
 ## 2.1.0 2017-01-28
 
 - Replace iceweasel package with firefox-esr on debian platform
