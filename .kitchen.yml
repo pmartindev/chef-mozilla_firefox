@@ -12,7 +12,7 @@ platforms:
       box: dhoer/windows-2012r2
     attributes:
       mozilla_firefox:
-        version: latest # latest-esr doesn't have 64bit version
+        version: latest
   - name: ubuntu-12.04
   - name: ubuntu-14.04
   - name: centos-6.8
@@ -26,7 +26,7 @@ suites:
       - mozilla_firefox_test
     attributes:
 
-  - name: windows_32bit_only
+  - name: windows_force_32bit
     run_list:
       - mozilla_firefox_test
     attributes:

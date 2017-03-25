@@ -13,7 +13,7 @@
 This cookbook installs Firefox browser. Mac OS X, Ubuntu, and Windows download directly from 
 [Mozilla](https://download-installer.cdn.mozilla.net/pub/firefox/releases/latest/README.txt) where you can specify 
 version (e.g., `latest`, `latest-esr`, `latest-beta`, `42.0`, `38.4.0esr`, or `43.0b4`) and language with 
-`latest-esr` and `en-US` being the defaults. CentOS, Red Hat and Debian platforms default to using the package manager.
+`latest-esr` and `en-US` being the defaults. CentOS, Red Hat, Ubuntu and Debian platforms default to using the package manager.
  
 A `firefox_version` method is also available to retrieve the default version installed.
 
@@ -54,7 +54,7 @@ Default is `latest-esr`.
 is true.  Default is `en-US`.
 * `node['mozilla_firefox']['force_32bit']` - Install 32-bit browser on 64-bit machines. Ignored on Mac OS X and package 
 installs. Default `false`.
-* `node['mozilla_firefox']['use_package_manager']` - Install using apt or yum package manager. CentOS, Red Hat and Debian platforms only. 
+* `node['mozilla_firefox']['use_package_manager']` - Install using apt or yum package manager. CentOS, Red Hat, Ubuntu and Debian platforms only. 
 Default is `true`.
 * `node['mozilla_firefox']['packages']` - Dependency packages for non-package installs. 
 Linux platform only. Default values depend on Linux platform.

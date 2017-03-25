@@ -4,6 +4,7 @@
 
 - Rename sensitive attribute to confidential to be Chef 13 compatible
 - Removed 32bit_only attribute (use force_32bit instead)
+- Default Ubuntu to using package manager
 
 ## 2.1.1 2017-02-04
 
