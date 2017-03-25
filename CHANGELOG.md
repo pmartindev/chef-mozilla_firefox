@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.0.0 2017-03-24
+
+- Rename sensitive attribute to confidential to be Chef 13 compatible
+
 ## 2.1.1 2017-02-04
 
 - Fix #13 firefox_version throws exception on macosx

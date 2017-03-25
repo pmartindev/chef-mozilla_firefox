@@ -67,7 +67,7 @@ describe 'mozilla_firefox' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(
         platform: 'mac_os_x',
-        version: '10.7.4',
+        version: '10.12',
         step_into: ['mozilla_firefox']
       ).converge(described_recipe)
     end
