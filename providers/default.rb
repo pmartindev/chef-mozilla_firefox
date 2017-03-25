@@ -154,7 +154,7 @@ def firefox_install
       linux_install(url)
     end
   else
-    pkg = platform_family?('debian') ? 'firefox-esr' : 'firefox'
+    pkg = platform?('debian') ? 'firefox-esr' : 'firefox'
     # install at compile time so version is available during convergence
     package pkg do
       retries new_resource.attempts
