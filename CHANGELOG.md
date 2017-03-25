@@ -2,7 +2,7 @@
 
 ## 3.0.0 2017-03-24
 
-- Rename sensitive attribute to confidential to be Chef 13 compatible
+- Rename retries attribute to attempts to be Chef 13 compatible
 - Removed 32bit_only attribute (use force_32bit instead)
 - Default Ubuntu to using package manager
 
