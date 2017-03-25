@@ -52,8 +52,6 @@ e.g., `42.0`, `38.4.0esr`, or `43.0b4`. Ignored on CentOS, Red Hat and Debian pl
 Default is `latest-esr`.
 * `node['mozilla_firefox']['lang']` - Language desired. Ignored on CentOS, Red Hat and Debian platforms when `use_package_manager` 
 is true.  Default is `en-US`.
-* `node['mozilla_firefox']['32bit_only']` - DEPRECATED! This will be dropped in next major release, use `force_32bit`
-instead.
 * `node['mozilla_firefox']['force_32bit']` - Install 32-bit browser on 64-bit machines. Ignored on Mac OS X and package 
 installs. Default `false`.
 * `node['mozilla_firefox']['use_package_manager']` - Install using apt or yum package manager. CentOS, Red Hat and Debian platforms only. 

@@ -1,9 +1,6 @@
 default['mozilla_firefox']['version'] = 'latest-esr'
 default['mozilla_firefox']['lang'] = 'en-US'
-
-default['mozilla_firefox']['32bit_only'] = false # DEPRECATED! use force_32bit
 default['mozilla_firefox']['force_32bit'] = node['mozilla_firefox']['32bit_only']
-
 default['mozilla_firefox']['use_package_manager'] = true
 default['mozilla_firefox']['packages'] = case node['platform_family']
                                          when 'debian'
