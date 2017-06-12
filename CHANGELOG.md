@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 3.0.1 2017-06-12
+
+- Allow for non-package manager installs on all linux platforms
+- Drop support for CentOS 5
+
 ## 3.0.0 2017-03-24
 
 - Rename retries attribute to attempts to be Chef 13 compatible
