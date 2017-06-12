@@ -10,7 +10,7 @@
 [osx]: https://travis-ci.org/dhoer/chef-mozilla_firefox/branches
 [win]: https://ci.appveyor.com/project/dhoer/chef-mozilla-firefox 
 
-This cookbook installs Firefox browser. Mac OS X, Ubuntu, and Windows download directly from 
+This cookbook installs Firefox browser. Mac OS X, Linux, and Windows download directly from 
 [Mozilla](https://download-installer.cdn.mozilla.net/pub/firefox/releases/latest/README.txt) where you can specify 
 version (e.g., `latest`, `latest-esr`, `latest-beta`, `42.0`, `38.4.0esr`, or `43.0b4`) and language with 
 `latest-esr` and `en-US` being the defaults. CentOS, Red Hat, Ubuntu and Debian platforms default to using the package manager.
@@ -75,7 +75,7 @@ Ignored on CentOS, Red Hat and Debian platforms when `use_package_manager` is tr
 * `force_32bit` -  Install 32-bit browser on 64-bit machines. Ignored on Mac OS X and package installs. Default `false`.
 * `path` - Path to install Firefox. Linux: `/opt/firefox/#{version}_#{language}`, Windows: 
 `#{ENV['SYSTEMDRIVE']}\\Program Files\\Mozilla Firefox\\firefox.exe` when nil. Default `nil`.
-* `use_package_manager` - Install using apt or yum package manager. CentOS/Red Hat and Debian platforms only. Default is `true`.
+* `use_package_manager` - Install using apt or yum package manager. Linux platforms only. Default is `true`.
 * `link` - Create the specfied symlink (Linux non-package installs only). This can be an array to create multiple symlinks to the same 
 instance, or a string for a single symlink. Default `nil`.
 * `packages` - Dependency packages for non-package installs. CentOS, Red Hat and Debian platforms only. Default values depend 
