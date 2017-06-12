@@ -94,5 +94,5 @@ Please refer to [CONTRIBUTING](https://github.com/dhoer/chef-mozilla_firefox/blo
 
 ## License
 
-MIT - see the accompanying [LICENSE](https://github.com/dhoer/chef-mozilla_firefox/blob/master/LICENSE.md) 
+MIT - see the accompanying [LICENSE](https://github.com/dhoer/chef-mozilla_firefox/blob/master/LICENSE) 
 file for details.
