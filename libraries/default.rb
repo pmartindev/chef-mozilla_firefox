@@ -31,10 +31,14 @@ module MozillaFirefox
     cmd = Mixlib::ShellOut.new(command)
     # Firefox executable can no longer be run by root
     # https://bugzilla.mozilla.org/show_bug.cgi?id=1323302
-    system("useradd firefox_install")
-    cmd.user="firefox_install"
-    cmd.run_command
-    system("userdel firefox_install")
+    if RUBY_PLATFORM =~ /linux/
+      system("useradd firefox_install")
+      cmd.user="firefox_install"
+      cmd.run_command
+      system("userdel firefox_install")
+    else
+      cmd.run_command
+    end
     cmd.stdout.strip
   end
 end
