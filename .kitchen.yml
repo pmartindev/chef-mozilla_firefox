@@ -4,7 +4,7 @@ driver:
 
 provisioner:
   name: chef_solo
-  require_chef_omnibus: 11.18
+  require_chef_omnibus: 14.12.3
 
 platforms:
   - name: windows-2012r2
@@ -23,6 +23,7 @@ platforms:
 suites:
   - name: default
     run_list:
+      - mozilla_firefox_test::package
       - mozilla_firefox_test
     attributes:
 
