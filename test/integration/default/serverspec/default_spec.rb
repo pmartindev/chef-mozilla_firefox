@@ -24,12 +24,11 @@ describe 'firefox::default' do
       its(:stdout) { should match(/Mozilla Firefox /) }
       its(:exit_status) { should eq 0 }
     end
-  when 'debian'
-    describe command('firefox -v') do
-      its(:stdout) { should match(/Mozilla Firefox /) }
-      its(:exit_status) { should eq 0 }
-    end
   else # linux
+    # ENV settings are to workaround Firefox warning:
+    # "Running Firefox as root in a regular user's session is not supported."
+    ENV['HOME']='/root'
+    ENV['XDG_RUNTIME_DIR']=nil
     describe command('firefox -v') do
       its(:stdout) { should match(/Mozilla Firefox /) }
       its(:exit_status) { should eq 0 }

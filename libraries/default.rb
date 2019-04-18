@@ -28,7 +28,9 @@ module MozillaFirefox
   # private
 
   def firefox_shellout(command)
-    cmd = Mixlib::ShellOut.new(command)
+    # env settings are to workaround Firefox warning:
+    # "Running Firefox as root in a regular user's session is not supported."
+    cmd = Mixlib::ShellOut.new(command, :env => { 'HOME' => '/root', 'XDG_RUNTIME_DIR' => nil })
     cmd.run_command
     cmd.stdout.strip
   end
